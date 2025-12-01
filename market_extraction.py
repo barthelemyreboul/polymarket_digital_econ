@@ -1,5 +1,6 @@
 import asyncio
 import json
+import time
 from datetime import datetime
 from typing import Any, Optional
 
@@ -140,9 +141,9 @@ async def main():
     events = await get_events_by_public_search(
         query="US Politics",
         event_status="closed",
-        page=100
+        page=50
     )
-    selected_events = clean_events(events= events, number=10)
+    selected_events = clean_events(events= events, number=5)
     data = []
 
     for event in selected_events:
@@ -160,9 +161,9 @@ async def main():
             datetime.fromisoformat(event["endDate"].replace(' ', 'T').replace('+00', '+00:00')).timestamp())
 
         # Fetch trade history in chunks not to overload the API
-        end = False
         results = []
         for dl in range(unix_start, unix_end, 86400):
+            time.sleep(0.1)
             tasks = []
             for hl in range(0, 86400, 28800):
                 ts = dl + hl
@@ -170,7 +171,7 @@ async def main():
                         token_id=asset_id,
                         start_ts=ts,
                         end_ts= ts+hl,
-                        fidelity=300, # 5 minutes
+                        fidelity=1200, # 10 minutes
                     )
                 tasks.append(history)
 
