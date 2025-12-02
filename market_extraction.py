@@ -44,7 +44,13 @@ async def get_events_by_public_search(
 ) -> list[dict[str, Any]]:
     """
     Perform a public search on the Polymarket API asynchronously.
-    Returns a list of events.
+    Args:
+        query (str): Query string.
+        event_status (str, optional): Event status. Defaults to None.
+        page (int, optional): Page. Defaults to 1.
+    Returns:
+        list[dict[str, Any]]: List of events dictionaries.
+
     """
 
     url = "https://gamma-api.polymarket.com/public-search"
@@ -76,22 +82,16 @@ async def get_events_by_public_search(
 
     return total_events
 
-    # Run all HTTP requests concurrently
-    #results = await asyncio.gather(*tasks, return_exceptions=False)
-
-
-    # results is a list of metadata dicts
-    #return {s: r[0] for s,r in zip(slugs, results)}
 
 async def get_trade_history_by_tokenid(
         token_id: int,
         start_ts: Optional[int] = None,
         end_ts: Optional[int] = None,
-        fidelity: int = 1,
+        fidelity: int = 5,
         interval: Optional[str] = None,
-                         ):
+                        ) -> list[dict[str, Any]]:
     """
-    Fetch trade history from Polymarket API based on the provided slug.
+    Fetch trade history from Polymarket API based on the token ID, related to a specific market.
     Args:
         token_id (int): The CLOB token ID for which to fetch price history
         start_ts (Optionnal[int]): The start time, a Unix timestamp in UTC
@@ -100,7 +100,7 @@ async def get_trade_history_by_tokenid(
         interval (Optionnal[str]): The interval for the price history from now (e.g., '1m', '5m', '1h'). Mutually exclusive with start_ts and end_ts
 
     Returns:
-        dict: The JSON response containing trade history.
+        list[dict[str, Any]]:  List of trade history dictionaries for a given market.
     """
 
     url = "https://clob.polymarket.com/prices-history"

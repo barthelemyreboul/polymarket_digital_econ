@@ -6,6 +6,13 @@ from model import MarketData
 
 
 def init_db(db_path, table_name):
+    """
+    Initialize the database if not already present.
+    Args:
+        db_path (str): Path to the database
+        table_name (str): Name of the table
+
+    """
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
@@ -25,6 +32,14 @@ def init_db(db_path, table_name):
 
 
 def insert_db(db_path, table_name, market_data : MarketData):
+    """
+    Inserts a new market data into the database.
+    Args:
+        db_path (str): Path to the database
+        table_name (str): Name of the table
+        market_data (MarketData): Market data object
+
+    """
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
