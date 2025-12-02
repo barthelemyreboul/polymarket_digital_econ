@@ -10,57 +10,45 @@ The objective is to observe correlations between bitcoin & political market even
 This script interacts with several Polymarket API endpoints and performs a complete asynchronous workflow:
 
 1. **Public search**
-   Queries the *public-search* endpoint to retrieve events matching a given search term.
+    Queries the *public-search* endpoint to retrieve events matching a given search term.
 
 2. **Filtering events**
-   Keeps 10 random events with a transaction volume >1 000 000$ and published within a specific timeperiod.
+    Keeps n random events through their associated token with a transaction volume >1 000 000$ and published within a specific timeperiod.
 
-3**Price history download**
-   It queries the *prices-history* endpoint to retrieve the price history for that token, using a specified interval (here `1d`) and fidelity (`1`).
+3. **Price history download**
+    Queries the *prices-history* endpoint to retrieve the price history for these tokens, using a specified interval (with a start time and an end time) or fodelity (resolution of the data) .
 
+4. **Load into an SQLite DB**
+    Eventually, load the data in a database named "polymarket.db" that will be processed on a notebook. 
 
 ---
 
 ## Requirements
 
-*(You will fill this section.)*
-
+- python >=3.13
+- see the "requirements.txt" file
+- no need of credentials to access the API
 ---
 
 ## Run the code
 
-1. Use Python 3.10+.
-2. Install the necessary dependencies:
+1. Use Python 3.13+.
+2. Install the necessary dependencies (requirements.txt):
 
 ```bash
-pip install aiohttp requests matplotlib
+pip install -r "requirements.txt"
 ```
 
-3. Run the script:
-
-```bash
-python market_extraction.py
-```
-To extract the data, and:
+3. Run the script to extract & load the data:
 
 ```bash
 python database.py
 ```
-to store it in a local SQLite database.
-
-The script will:
-
-* search for `"bitcoin"`,
-* fetch metadata for all matching events,
-* extract a CLOB token ID,
-* retrieve its price history,
-* extract timestamps and prices,
-* print `"ok"` at completion.
 
 ---
 
 ## References
 
-*(You will fill this section.)*
+
 
 ---
