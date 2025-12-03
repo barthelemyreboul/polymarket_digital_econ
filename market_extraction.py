@@ -142,10 +142,10 @@ def select_market(event: dict) -> int:
 
 async def main():
     events = await get_events_by_public_search(
-        query="Bitcoin",
-        page=5
+        query="US Politics",
+        page=100
     )
-    selected_events = clean_events(events= events, number=5)
+    selected_events = clean_events(events= events, number=10)
     data = []
 
     for event in selected_events:
