@@ -68,6 +68,9 @@ async def get_events_by_public_search(
                 "ascending":"false"
             }
 
+            #Clean up None values
+            params = {k: v for k, v in params.items() if v is not None}
+
             async with session.get(url, params=params) as resp:
                 resp.raise_for_status()
                 data = await resp.json()
@@ -139,9 +142,8 @@ def select_market(event: dict) -> int:
 
 async def main():
     events = await get_events_by_public_search(
-        query="US Politics",
-        event_status="closed",
-        page=50
+        query="Bitcoin",
+        page=5
     )
     selected_events = clean_events(events= events, number=5)
     data = []
@@ -171,7 +173,7 @@ async def main():
                         token_id=asset_id,
                         start_ts=ts,
                         end_ts= ts+hl,
-                        fidelity=1200, # 10 minutes
+                        fidelity=5 # 5 minutes
                     )
                 tasks.append(history)
 
@@ -179,13 +181,13 @@ async def main():
             tasks = await asyncio.gather(*tasks)
             # Remove double entries in timestamp
 
-            results.extend(tasks)
+            results.extend(entry for task in tasks for entry in task.get("history", []))
 
         data.append(MarketData(
             event_title=event["title"],
             question=selected_market["question"],
             asset_id=asset_id,
-            data=[D["history"][0] for D in results if D.get("history")]
+            data=results
         ))
 
     return data
