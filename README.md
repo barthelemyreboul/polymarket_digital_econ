@@ -42,7 +42,7 @@ pip install -r "requirements.txt"
 3. Run the script to extract & load the data:
 
 ```bash
-python database.py
+python database_init.py
 ```
 
 ---
