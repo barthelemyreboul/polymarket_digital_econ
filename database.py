@@ -1,7 +1,8 @@
 import sqlite3
 import asyncio
 
-from market_extraction import main as market_main
+from market_extraction import main_politics as market_main
+from bitcoin_market import main_bitcoin
 from model import MarketData
 
 
@@ -64,15 +65,25 @@ def insert_db(db_path, table_name, market_data : MarketData):
 if __name__ == "__main__":
     init_db(db_path="polymarket.db", table_name="market_data")
     
-    data= asyncio.run(market_main())
+    #data= asyncio.run(main_bitcoin())
     db_path = "polymarket.db"
     table_name = "market_data"
     
-    for market_data in data:
-    
+    for market_data in ["data"]:
+        break
         insert_db(
             db_path=db_path,
             table_name= table_name,
             market_data =market_data
         )
+    data_2= asyncio.run(market_main())
+    for market_data in data_2:
+
+        insert_db(
+            db_path=db_path,
+            table_name= table_name,
+            market_data =market_data
+        )
+
+
     
