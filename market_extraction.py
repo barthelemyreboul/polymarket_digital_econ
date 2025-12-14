@@ -10,8 +10,8 @@ from utils import get_events_by_public_search, get_trade_history_by_tokenid, cle
 
 async def main_politics():
     events = await get_events_by_public_search(
-        query="US national Bitcoin reserve in 2025?",
-        page=1
+        query="US Politics",
+        page=100
     )
     selected_events = clean_events(events= events, number=1)
     data = []
@@ -56,4 +56,3 @@ async def main_politics():
         ))
 
     return data
-

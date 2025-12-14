@@ -6,7 +6,7 @@ from bitcoin_market import main_bitcoin
 from model import MarketData
 
 
-def init_db(db_path, table_name):
+def init_db(db_path: str, table_name: str):
     """
     Initialize the database if not already present.
     Args:
@@ -32,7 +32,7 @@ def init_db(db_path, table_name):
     conn.close()
 
 
-def insert_db(db_path, table_name, market_data : MarketData):
+def insert_db(db_path: str, table_name: str, market_data : MarketData):
     """
     Inserts a new market data into the database.
     Args:
@@ -63,20 +63,27 @@ def insert_db(db_path, table_name, market_data : MarketData):
 
 
 if __name__ == "__main__":
+
+    # Initialize the database
     init_db(db_path="polymarket.db", table_name="market_data")
-    
-    #data= asyncio.run(main_bitcoin())
+
+    # First get & insert bitcoin market data
+    data= asyncio.run(main_bitcoin())
     db_path = "polymarket.db"
     table_name = "market_data"
     
-    for market_data in ["data"]:
-        break
+    for market_data in data:
+
         insert_db(
             db_path=db_path,
             table_name= table_name,
             market_data =market_data
         )
+
+
+    # Then get & insert politics market data
     data_2= asyncio.run(market_main())
+
     for market_data in data_2:
 
         insert_db(

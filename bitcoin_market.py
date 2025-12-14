@@ -20,7 +20,7 @@ async def main_bitcoin():
         for hl in range(0, 86400, 28800):
             ts = dl + hl
             history = get_trade_history_by_tokenid(
-                token_id=85949163243245471221790979452091560100141884930227668573477517865165344048388,
+                token_id=95047670164958340277111777643825971965059782358468932324606496632183052684085,
                 start_ts=ts,
                 end_ts=ts + hl,
                 fidelity=5,  # 5 minutes
@@ -35,8 +35,8 @@ async def main_bitcoin():
 
     data.append(MarketData(
         event_title="What price will Bitcoin hit in 2025?",
-        question="Will Bitcoin reach $250,000 by December 31, 2025?",
-        asset_id=85949163243245471221790979452091560100141884930227668573477517865165344048388,
+        question="Will Bitcoin reach $70,000 by December 31, 2025?",
+        asset_id=95047670164958340277111777643825971965059782358468932324606496632183052684085,
         data=results
     ))
 

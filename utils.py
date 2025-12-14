@@ -98,7 +98,7 @@ async def get_events_by_public_search(
                     continue
 
                 total_events.extend(events)
-
+    print(f"Total events fetched: {len(total_events)}")
     return total_events
 
 

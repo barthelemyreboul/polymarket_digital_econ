@@ -13,13 +13,14 @@ This script interacts with several Polymarket API endpoints and performs a compl
     Queries the *public-search* endpoint to retrieve events matching a given search term.
 
 2. **Filtering events**
-    Keeps n random events through their associated token with a transaction volume >1 000 000$ and published within a specific timeperiod.
+    Keeps 10 random events through their associated token with a transaction volume >1 000 000$ and published within a specific timeperiod.
 
 3. **Price history download**
     Queries the *prices-history* endpoint to retrieve the price history for these tokens, using a specified interval (with a start time and an end time) or fodelity (resolution of the data) .
 
 4. **Load into an SQLite DB**
-    Eventually, load the data in a database named "polymarket.db" that will be processed on a notebook. 
+    Eventually, load the data in a database named "polymarket.db" that will be processed on a notebook:
+see: Polymarket_Digital_Economy_Project.ipynb
 
 ---
 
@@ -27,7 +28,7 @@ This script interacts with several Polymarket API endpoints and performs a compl
 
 - python >=3.13
 - see the "requirements.txt" file
-- no need of credentials to access the API
+- no need for credentials to access the API
 ---
 
 ## Run the code
@@ -47,8 +48,3 @@ python database_init.py
 
 ---
 
-## References
-
-
-
----
