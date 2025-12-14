@@ -20,7 +20,7 @@ This script interacts with several Polymarket API endpoints and performs a compl
 
 4. **Load into an SQLite DB**
     Eventually, load the data in a database named "polymarket.db" that will be processed on a notebook:
-see: Polymarket_Digital_Economy_Project.ipynb
+    [Polymarket_Digital_Economy_Project.ipynb](https://colab.research.google.com/drive/13XWP-Jfr1WzVkfZZ4svD3R8vPTOTJKtP?usp=sharing)
 
 ---
 
